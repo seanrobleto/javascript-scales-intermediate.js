@@ -1,3 +1,6 @@
+const moment = require("moment");
+const axios = require("axios");
+
 /**
  * @param {array<number>} numbers - an array of numbers
  * @constraint implement this using built in Array functions; no for or while loops;
@@ -32,6 +35,11 @@ function add_all_negative_values(numbers) {
 
 function days_between(date_one, date_two) {
 
+    const day1 = moment(date_one);
+    const day2 = moment(date_two);
+
+    return day2.diff(day1, 'days');
+
 }
 
 /**
@@ -56,7 +64,7 @@ function validate_uuid(uuid) {
 
 async function predict_age_by_name(name) {
 
-    const axios = require("axios");
+
     let data = 0;
     await axios.get(`https://api.agify.io?name=${name}`).then((api_response) => {
         data = api_response.data.age;
@@ -73,7 +81,6 @@ async function predict_age_by_name(name) {
 
 async function list_songs_by(artist) {
 
-    const axios = require("axios");
     let song_array = [];
     await axios.get(`https://itunes.apple.com/search?term=${artist}&entity=musicVideo`).then(function (response) {
         data = response.data.results;
